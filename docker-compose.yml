@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  runanalytics-backend:
+    build: .
+    container_name: runanalytics-backend
+    image: runanalytics-backend:latest
+    env_file:
+      - .env
+    environment:
+      - TZ=America/Sao_Paulo
+    volumes:
+      - ${PWD}:/app
+    ports:
+      - 3000:3000
+    depends_on:
+      - postgres
+
+  postgres:
+    image: bitnami/postgresql
+    container_name: postgres
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USERNAME=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DATABASE=database
+    
