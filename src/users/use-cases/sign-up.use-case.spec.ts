@@ -54,7 +54,6 @@ describe('Sign Up Use Case Teste', () => {
 
     const { email, name } = await useCase.execute(userData);
 
-    await useCase.execute(userData);
     expect(name).toBe(userData.name);
     expect(email).toBe(userData.email);
   });
