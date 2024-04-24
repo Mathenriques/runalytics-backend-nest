@@ -7,7 +7,6 @@
 
   <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
     <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/10.2.4.svg" alt="NPM Version" /></a>
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://github.com/Mathenriques/runalytics-backend-nest/actions" target="_blank"><img src="https://github.com/Mathenriques/runalytics-backend-nest/actions/workflows/main.yml/badge.svg" alt="GitHub Actions" /></a>
 
