@@ -8,7 +8,6 @@ ENV NPM_VERSION ${NPM_VERSION}
 
 RUN npm install --location=global npm@${NPM_VERSION}
 
-
 WORKDIR /app
 
 COPY package*.json /
