@@ -21,7 +21,10 @@ export class User {
   name: string;
 
   @Column()
-  password: string;
+  email: string;
+
+  @Column()
+  password_hash: string;
 
   @Column({
     type: 'enum',
@@ -57,7 +60,8 @@ export class User {
   constructor(
     props: {
       name: string;
-      password: string;
+      email: string;
+      password_hash: string;
       gender: UserGender;
       birth_date: Date;
       diseases: string;
