@@ -4,6 +4,7 @@ import {
   IsEmail,
   IsEnum,
   IsNumber,
+  IsOptional,
   IsString,
   MaxLength,
   MinLength,
@@ -29,19 +30,24 @@ export class SignUpDto {
   birth_date: Date;
 
   @IsString()
-  diseases: string;
+  @IsOptional()
+  diseases?: string;
 
   @IsNumber()
-  weight: number;
+  @IsOptional()
+  weight?: number;
 
   @IsNumber()
-  height: number;
+  @IsOptional()
+  height?: number;
 
   @IsEnum(UserFitnessLevel)
-  fitness_level: UserFitnessLevel;
+  @IsOptional()
+  fitness_level?: UserFitnessLevel;
 
   @IsBoolean()
-  isOnBalancedDiet: boolean;
+  @IsOptional()
+  isOnBalancedDiet?: boolean;
 
   @IsBoolean()
   isAdmin: boolean;

@@ -20,7 +20,9 @@ export class User {
   @Column()
   name: string;
 
-  @Column()
+  @Column({
+    unique: true,
+  })
   email: string;
 
   @Column()
@@ -35,23 +37,23 @@ export class User {
   @Column()
   birth_date: Date;
 
-  @Column()
+  @Column({ nullable: true })
   diseases: string;
 
-  @Column()
+  @Column({ nullable: true })
   weight: number;
 
-  @Column()
+  @Column({ nullable: true })
   height: number;
 
   @Column({
     type: 'enum',
     enum: UserFitnessLevel,
-    default: UserFitnessLevel.ROOKIE,
+    nullable: true,
   })
   fitness_level: UserFitnessLevel;
 
-  @Column()
+  @Column({ nullable: true })
   isOnBalancedDiet: boolean;
 
   @Column()
@@ -64,12 +66,12 @@ export class User {
       password_hash: string;
       gender: UserGender;
       birth_date: Date;
-      diseases: string;
-      weight: number;
-      height: number;
+      diseases?: string;
+      weight?: number;
+      height?: number;
       fitness_level?: UserFitnessLevel;
+      isOnBalancedDiet?: boolean;
       isAdmin: boolean;
-      isOnBalancedDiet: boolean;
     },
     id?: string,
   ) {

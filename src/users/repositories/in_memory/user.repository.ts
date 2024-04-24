@@ -8,4 +8,14 @@ export class UserInMemoryRepository implements IUserRepository {
     data.id = crypto.randomUUID();
     this.items.push(data);
   }
+
+  async findByEmail(email: string): Promise<User> {
+    const user = this.items.find((item) => item.email === email);
+
+    if (!user) {
+      return null;
+    }
+
+    return user;
+  }
 }

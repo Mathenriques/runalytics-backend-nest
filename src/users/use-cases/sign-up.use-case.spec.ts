@@ -21,7 +21,7 @@ describe('Sign Up Use Case Teste', () => {
     useCase = module.get<SignUpUseCase>(SignUpUseCase);
   });
 
-  it('Should be able to create an use', async () => {
+  it('Should be able to create an non admin user', async () => {
     const userData = {
       name: 'User Teste',
       email: 'teste@example.com',
@@ -32,15 +32,43 @@ describe('Sign Up Use Case Teste', () => {
       fitness_level: UserFitnessLevel.ROOKIE,
       height: 180,
       weight: 88,
-      isAdmin: true,
+      isAdmin: false,
       isOnBalancedDiet: true,
     };
 
-    const { email, name, password_hash } = await useCase.execute(userData);
+    const { email, name } = await useCase.execute(userData);
 
     expect(name).toBe(userData.name);
     expect(email).toBe(userData.email);
+  });
 
-    console.log(password_hash);
+  it('Should be able to create an admin user', async () => {
+    const userData = {
+      name: 'User Teste',
+      email: 'teste@example.com',
+      password: '12345678',
+      gender: UserGender.MALE,
+      birth_date: new Date(),
+      isAdmin: true,
+    };
+
+    const { email, name } = await useCase.execute(userData);
+
+    expect(name).toBe(userData.name);
+    expect(email).toBe(userData.email);
+  });
+
+  it('Should not be able to create an user due to email already exists', async () => {
+    const userData = {
+      name: 'User Teste',
+      email: 'teste@example.com',
+      password: '12345678',
+      gender: UserGender.MALE,
+      birth_date: new Date(),
+      isAdmin: true,
+    };
+
+    await useCase.execute(userData);
+    await expect(() => useCase.execute(userData)).rejects.toBeInstanceOf(Error);
   });
 });
