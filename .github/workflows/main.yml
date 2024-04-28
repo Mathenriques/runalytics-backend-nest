@@ -12,7 +12,7 @@ jobs:
       - name: Check out repository code
         uses: actions/checkout@v4
       - name: npm install
-        run: npm ci
+        run: npm install
       - name: Run tests
         run: npm run test
       - run: echo "🍏 This job's status is ${{ job.status }}."
