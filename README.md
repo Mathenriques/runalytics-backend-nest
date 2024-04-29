@@ -1,19 +1,18 @@
 <p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
+  <a href="https://github.com/Mathenriques/runalytics-backend-nest/tree/master" target="blank"><img src="logo.png" width="200" alt="RunAlytics Logo" /></a>
 </p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
+[circleci-image]: https://drive.google.com/file/d/1eZLDCd_rVG5QyHDMwZ-hvtP_bauwegX2/view?usp=sharing
+[circleci-url]: https://github.com/Mathenriques/runalytics-backend-nest/tree/master
 
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
+  <p align="center">Take your running to the next level.</p>
     <p align="center">
 <a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
 <a href="https://github.com/Mathenriques/runalytics-backend-nest/actions" target="_blank"><img src="https://github.com/Mathenriques/runalytics-backend-nest/actions/workflows/main.yml/badge.svg" alt="GitHub Actions" /></a>
 
 
 ## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+Este projeto, concebido em colaboração com um especialista em educação física, fundamenta-se na ideia de que é possível prever e evitar lesões em corredores amadores por meio de uma análise meticulosa dos seus dados pessoais e hábitos de treino. Nosso intuito é desenvolver um aplicativo que transcenda a função de monitoramento, tornando-se um instrumento proativo de prevenção, guiado por feedbacks e conselhos embasados em rigor científico.
 
 ## Installation
 
@@ -26,12 +25,6 @@ $ npm install
 ```bash
 # development
 $ npm run start
-
-# watch mode
-$ npm run start:dev
-
-# production mode
-$ npm run start:prod
 ```
 
 ## Test
@@ -40,22 +33,18 @@ $ npm run start:prod
 # unit tests
 $ npm run test
 
-# e2e tests
-$ npm run test:e2e
-
 # test coverage
 $ npm run test:cov
 ```
 
-## Support
+## Diagrama de Blocos
 
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
+<img src="logo.png" width="200" alt="RunAlytics Logo" />
 
-## Stay in touch
+## Authors
 
-- Author - [Kamil Myśliwiec](https://kamilmysliwiec.com)
-- Website - [https://nestjs.com](https://nestjs.com/)
-- Twitter - [@nestframework](https://twitter.com/nestframework)
+- Matheus - [GitHub](https://github.com/Mathenriques)
+- Pietra - [GitHub](https://github.com/PietraSantos)
 
 ## License
 
