@@ -10,6 +10,24 @@ export class UserTypeOrmRepository implements IUserRepository {
     @InjectRepository(User)
     private typeOrmRepository: Repository<User>,
   ) {}
+
+  async removeUser(id: string): Promise<boolean> {
+    const result = this.typeOrmRepository.softDelete({ id });
+
+    if (!result) {
+      return false;
+    }
+
+    return true;
+  }
+
+  async countAdminUsers(): Promise<number> {
+    return this.typeOrmRepository.count({
+      where: {
+        isAdmin: true,
+      },
+    });
+  }
   async findById(id: string): Promise<User> {
     return this.typeOrmRepository.findOneBy({ id });
   }

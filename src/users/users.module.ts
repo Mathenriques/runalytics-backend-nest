@@ -6,6 +6,7 @@ import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { ValidateUserUseCase } from './use-cases/validate-user.use-case';
 import { UsersController } from './users.controller';
 import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
+import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -13,6 +14,7 @@ import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
     SignUpUseCase,
     ValidateUserUseCase,
     GetUserProfileUseCase,
+    RemoveUserUseCase,
     UserTypeOrmRepository,
     {
       provide: 'IUserRepository',
