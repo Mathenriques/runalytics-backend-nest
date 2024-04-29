@@ -10,6 +10,10 @@ export class UserTypeOrmRepository implements IUserRepository {
     @InjectRepository(User)
     private typeOrmRepository: Repository<User>,
   ) {}
+  async findById(id: string): Promise<User> {
+    return this.typeOrmRepository.findOneBy({ id });
+  }
+
   async findByEmail(email: string): Promise<User> {
     return this.typeOrmRepository.findOneBy({ email });
   }
