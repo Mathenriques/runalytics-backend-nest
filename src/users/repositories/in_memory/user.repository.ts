@@ -6,6 +6,20 @@ import { IUserRepository } from '../IUserRepository';
 export class UserInMemoryRepository implements IUserRepository {
   public items: User[] = [];
 
+  async countAdminUsers(): Promise<number> {
+    return this.items.filter((user) => user.isAdmin).length;
+  }
+
+  async removeUser(id: string): Promise<boolean> {
+    const result = this.items.filter((user) => user.id !== id);
+
+    if (!result) {
+      return false;
+    }
+
+    return true;
+  }
+
   async findById(id: string): Promise<User> {
     const user = this.items.find((item) => item.id === id);
 
