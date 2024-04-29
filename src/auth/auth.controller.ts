@@ -12,12 +12,12 @@ import { AuthRequest } from './models/AuthRequest.model';
 import { LoginUseCase } from './use-cases/login.use-case';
 import { isPublic } from './decorators/is-public.decorator';
 
-@Controller()
+@Controller('auth')
 export class AuthController {
   @Inject(LoginUseCase)
   private readonly loginUseCase: LoginUseCase;
 
-  @Post('login')
+  @Post('sign-in')
   @isPublic()
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)

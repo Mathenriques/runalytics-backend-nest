@@ -4,6 +4,7 @@ import { User } from './entities/user.entity';
 import { SignUpUseCase } from './use-cases/sign-up.use-case';
 import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { ValidateUserUseCase } from './use-cases/validate-user.use-case';
+import { UsersController } from './users.controller';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -16,6 +17,7 @@ import { ValidateUserUseCase } from './use-cases/validate-user.use-case';
       useExisting: UserTypeOrmRepository,
     },
   ],
+  controllers: [UsersController],
   exports: [
     TypeOrmModule.forFeature([User]),
     ValidateUserUseCase,

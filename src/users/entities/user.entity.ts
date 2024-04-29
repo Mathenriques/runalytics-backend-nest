@@ -12,7 +12,7 @@ export enum UserFitnessLevel {
   ADVANCED = 'advanced',
 }
 
-@Entity()
+@Entity('users')
 export class User {
   @PrimaryColumn()
   id: string;
@@ -34,7 +34,7 @@ export class User {
   })
   gender: UserGender;
 
-  @Column()
+  @Column({ type: 'date' })
   birth_date: Date;
 
   @Column({ nullable: true })
