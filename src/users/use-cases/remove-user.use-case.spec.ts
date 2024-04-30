@@ -3,16 +3,19 @@ import { SignUpUseCase } from './sign-up.use-case';
 import { UserInMemoryRepository } from '../repositories/in_memory/user.repository';
 import { UserFitnessLevel, UserGender } from '../entities/user.entity';
 import { RemoveUserUseCase } from './remove-user.use-case';
+import { GetUserProfileUseCase } from './get-user-profile.use-case';
 
 describe('Remove User Use Case Teste', () => {
   let useCase: RemoveUserUseCase;
   let signUpUseCase: SignUpUseCase;
+  let getUserDataUseCase: GetUserProfileUseCase;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       providers: [
         SignUpUseCase,
         RemoveUserUseCase,
+        GetUserProfileUseCase,
         UserInMemoryRepository,
         {
           provide: 'IUserRepository',
@@ -23,6 +26,9 @@ describe('Remove User Use Case Teste', () => {
 
     useCase = module.get<RemoveUserUseCase>(RemoveUserUseCase);
     signUpUseCase = module.get<SignUpUseCase>(SignUpUseCase);
+    getUserDataUseCase = module.get<GetUserProfileUseCase>(
+      GetUserProfileUseCase,
+    );
   });
 
   it('Should be able to remove an user', async () => {
@@ -41,9 +47,11 @@ describe('Remove User Use Case Teste', () => {
     };
 
     const { id } = await signUpUseCase.execute(userData);
-    const { result } = await useCase.execute(id);
+    const { rowsAffected } = await useCase.execute(id);
+    const { deletedDate } = await getUserDataUseCase.execute(id);
 
-    expect(result).toBe(true);
+    expect(rowsAffected).toBe(1);
+    expect(deletedDate).toBeInstanceOf(Date);
   });
 
   it('Should not be able to remove a non-existent user', async () => {

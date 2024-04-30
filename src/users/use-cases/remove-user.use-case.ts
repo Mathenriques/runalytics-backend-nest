@@ -18,14 +18,10 @@ export class RemoveUserUseCase {
       throw new Error('The system needs at least one administrator');
     }
 
-    const userWasDeleted = this.userRepo.removeUser(id);
-
-    if (!userWasDeleted) {
-      throw new Error('User was not deleted!');
-    }
+    const rowsAffected = await this.userRepo.removeUser(id);
 
     return {
-      result: true,
+      rowsAffected,
     };
   }
 }

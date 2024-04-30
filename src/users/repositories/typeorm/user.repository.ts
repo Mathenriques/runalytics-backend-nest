@@ -11,14 +11,10 @@ export class UserTypeOrmRepository implements IUserRepository {
     private typeOrmRepository: Repository<User>,
   ) {}
 
-  async removeUser(id: string): Promise<boolean> {
-    const result = this.typeOrmRepository.softDelete({ id });
+  async removeUser(id: string): Promise<number | null> {
+    const { affected } = await this.typeOrmRepository.softDelete({ id });
 
-    if (!result) {
-      return false;
-    }
-
-    return true;
+    return affected;
   }
 
   async countAdminUsers(): Promise<number> {
