@@ -5,5 +5,5 @@ export interface IUserRepository {
   findByEmail(email: string): Promise<User>;
   findById(id: string): Promise<User>;
   countAdminUsers(): Promise<number>;
-  removeUser(id: string): Promise<boolean>;
+  removeUser(id: string): Promise<number | null>;
 }

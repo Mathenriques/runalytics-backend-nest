@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
 export enum UserGender {
   MALE = 'male',
@@ -59,6 +59,9 @@ export class User {
   @Column()
   isAdmin: boolean;
 
+  @DeleteDateColumn()
+  deletedDate: Date;
+
   constructor(
     props: {
       name: string;
@@ -72,6 +75,7 @@ export class User {
       fitness_level?: UserFitnessLevel;
       isOnBalancedDiet?: boolean;
       isAdmin: boolean;
+      deletedDate?: Date;
     },
     id?: string,
   ) {

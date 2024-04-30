@@ -10,14 +10,12 @@ export class UserInMemoryRepository implements IUserRepository {
     return this.items.filter((user) => user.isAdmin).length;
   }
 
-  async removeUser(id: string): Promise<boolean> {
-    const result = this.items.filter((user) => user.id !== id);
+  async removeUser(id: string): Promise<number | null> {
+    const index = this.items.findIndex((item) => item.id === id);
 
-    if (!result) {
-      return false;
-    }
+    this.items[index].deletedDate = new Date();
 
-    return true;
+    return 1;
   }
 
   async findById(id: string): Promise<User> {
