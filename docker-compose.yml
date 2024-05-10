@@ -1,4 +1,8 @@
 version: "3.9"
+networks:
+  runalytics-network:
+    name: runalytics-network
+    driver: bridge
 
 services:
   runanalytics-backend:
@@ -15,6 +19,8 @@ services:
       - 3000:3000
     depends_on:
       - postgres
+    networks:
+      - runalytics-network
 
   postgres:
     image: bitnami/postgresql
@@ -25,4 +31,6 @@ services:
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=runalytics
+    networks:
+      - runalytics-network
     
