@@ -6,10 +6,10 @@ const configService = new ConfigService();
 export const dataSourceConfig: DataSourceOptions = {
   type: 'postgres',
   host: configService.get('DB_HOST'),
-  port: configService.get('DB_PORT'),
+  port: configService.get('DB_PORT') || 5432,
   username: configService.get('DB_USERNAME'),
   password: configService.get('DB_PASSWORD'),
-  database: configService.get('DB_DATABASE'),
+  database: configService.get('DB_DATABASE') || 'database',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
 };

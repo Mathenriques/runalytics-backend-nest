@@ -42,7 +42,7 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "start:dev"]
+CMD ["npm", "run", "start:prod"]
 
 ## Production 
 FROM docker.io/node:${NODE_VERSION} AS production
