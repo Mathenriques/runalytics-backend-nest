@@ -34,6 +34,8 @@ ENV JWT_SECRET=$JWT_SECRET
 
 RUN npm install --location=global npm@${NPM_VERSION}
 
+RUN npm install -g @nestjs/cli
+
 WORKDIR /app
 
 COPY package*.json /
@@ -76,6 +78,8 @@ ARG JWT_SECRET
 ENV JWT_SECRET=$JWT_SECRET
 
 RUN npm install --location=global npm@${NPM_VERSION}
+
+RUN npm install -g @nestjs/cli
 
 WORKDIR /app
 
