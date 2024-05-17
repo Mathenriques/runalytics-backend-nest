@@ -20,6 +20,7 @@ services:
       - DB_PASSWORD=postgres
       - DB_DATABASE=runalytics
       - JWT_SECRET=runalytics
+    command: sh -c "npm install"
     volumes:
       - ${PWD}:/app
     ports:

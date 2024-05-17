@@ -11,27 +11,6 @@ ENV NPM_VERSION ${NPM_VERSION}
 ARG NPM_VERSION
 ENV NPM_VERSION ${NPM_VERSION}
 
-ARG DB_TYPE
-ENV DB_TYPE=$DB_TYPE
-
-ARG DB_HOST
-ENV DB_HOST=$DB_HOST
-
-ARG DB_PORT
-ENV DB_PORT=$DB_PORT
-
-ARG DB_USERNAME
-ENV DB_USERNAME=$DB_USERNAME
-
-ARG DB_PASSWORD
-ENV DB_PASSWORD=$DB_PASSWORD
-
-ARG DB_DATABASE
-ENV DB_DATABASE=$DB_DATABASE
-
-ARG JWT_SECRET
-ENV JWT_SECRET=$JWT_SECRET
-
 RUN npm install --location=global npm@${NPM_VERSION}
 
 RUN npm install -g @nestjs/cli
@@ -44,7 +23,7 @@ RUN npm install
 
 COPY . .
 
-CMD ["npm", "run", "start:prod"]
+CMD ["npm", "run", "start:dev"]
 
 ## Production 
 FROM docker.io/node:${NODE_VERSION} AS production
