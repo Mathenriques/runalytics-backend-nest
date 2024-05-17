@@ -9,7 +9,7 @@ export const dataSourceConfig: DataSourceOptions = {
   port: configService.get('DB_PORT') || 5432,
   username: configService.get('DB_USERNAME'),
   password: configService.get('DB_PASSWORD'),
-  database: configService.get('DB_DATABASE') || 'database',
+  database: configService.get('DB_DATABASE') || 'runalytics',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
 };
