@@ -1,8 +1,4 @@
 version: "3.9"
-networks:
-  runalytics-network:
-    name: runalytics-network
-    driver: bridge
 
 services:
   runanalytics-backend:
@@ -20,16 +16,13 @@ services:
       - DB_PASSWORD=postgres
       - DB_DATABASE=runalytics
       - JWT_SECRET=runalytics
-    command: sh -c "npm install"
     volumes:
-      - ${PWD}:/app
+      - .:/app
     ports:
       - 3000:3000
     depends_on:
       - postgres
-    networks:
-      - runalytics-network
-
+    
   postgres:
     image: bitnami/postgresql
     container_name: postgres
@@ -39,6 +32,4 @@ services:
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=runalytics
-    networks:
-      - runalytics-network
     
