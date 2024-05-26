@@ -12,6 +12,8 @@ import { SignUpDto } from './dtos/sign-up.dto';
 import { SignUpUseCase } from './use-cases/sign-up.use-case';
 import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
+import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
+import { ArrayQuery } from './repositories/IUserRepository';
 
 @Controller('users')
 export class UsersController {
@@ -20,6 +22,9 @@ export class UsersController {
 
   @Inject(GetUserProfileUseCase)
   private readonly getUserProfileUseCase: GetUserProfileUseCase;
+
+  @Inject(GetAllUsersUseCase)
+  private readonly getAllUsersUseCase: GetAllUsersUseCase;
 
   @Inject(RemoveUserUseCase)
   private readonly removeUserUseCase: RemoveUserUseCase;
@@ -33,6 +38,11 @@ export class UsersController {
   @Get(':id')
   getUserData(@Param('id') id: string) {
     return this.getUserProfileUseCase.execute(id);
+  }
+
+  @Get()
+  getAllUsers(@Body() query: ArrayQuery) {
+    return this.getAllUsersUseCase.execute(query);
   }
 
   @Delete(':id')

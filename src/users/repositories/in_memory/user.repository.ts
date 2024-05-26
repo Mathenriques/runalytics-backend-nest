@@ -1,10 +1,29 @@
 import { randomUUID } from 'crypto';
 
 import { User } from 'src/users/entities/user.entity';
-import { IUserRepository } from '../IUserRepository';
+import {
+  ArrayQuery,
+  GetAllUsersReturn,
+  IUserRepository,
+} from '../IUserRepository';
 
 export class UserInMemoryRepository implements IUserRepository {
   public items: User[] = [];
+
+  async getAllUsers(query: ArrayQuery): Promise<GetAllUsersReturn> {
+    const users = this.items.filter(
+      (item) => !item.isAdmin && item.deletedDate === null,
+    );
+
+    const startIndex = query.skip;
+    const endIndex = query.skip + query.take;
+    const usersPaginated = users.slice(startIndex, endIndex);
+
+    return {
+      data: usersPaginated,
+      count: users.length,
+    };
+  }
 
   async countAdminUsers(): Promise<number> {
     return this.items.filter((user) => user.isAdmin).length;

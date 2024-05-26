@@ -1,5 +1,9 @@
 import { Injectable } from '@nestjs/common';
-import { IUserRepository } from '../IUserRepository';
+import {
+  ArrayQuery,
+  GetAllUsersReturn,
+  IUserRepository,
+} from '../IUserRepository';
 import { Repository } from 'typeorm';
 import { User } from 'src/users/entities/user.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -10,6 +14,23 @@ export class UserTypeOrmRepository implements IUserRepository {
     @InjectRepository(User)
     private typeOrmRepository: Repository<User>,
   ) {}
+
+  async getAllUsers(query: ArrayQuery): Promise<GetAllUsersReturn> {
+    const take = query.take || 10;
+    const skip = query.skip || 0;
+
+    const [result, total] = await this.typeOrmRepository.findAndCount({
+      where: { isAdmin: false, deletedDate: null },
+      order: { name: 'DESC' },
+      take: take,
+      skip: skip,
+    });
+
+    return {
+      data: result,
+      count: total,
+    };
+  }
 
   async removeUser(id: string): Promise<number | null> {
     const { affected } = await this.typeOrmRepository.softDelete({ id });
