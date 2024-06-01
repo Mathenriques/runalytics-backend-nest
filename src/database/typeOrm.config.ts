@@ -14,7 +14,7 @@ export const dataSourceConfig: DataSourceOptions = {
   migrations: ['dist/migrations/*.js'],
   logging: true,
   ssl: {
-    ca: process.env.SSL_CERT,
+    rejectUnauthorized: false,
   },
 };
 
