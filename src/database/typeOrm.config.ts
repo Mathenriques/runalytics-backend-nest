@@ -13,9 +13,12 @@ export const dataSourceConfig: DataSourceOptions = {
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
   logging: true,
-  ssl: {
-    rejectUnauthorized: false,
-  },
+  ssl:
+    configService.get('NODE_ENV') === 'development'
+      ? false
+      : {
+          rejectUnauthorized: false,
+        },
 };
 
 const dataSource = new DataSource(dataSourceConfig);
