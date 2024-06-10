@@ -75,6 +75,7 @@ export class User {
       diseases?: string;
       weight?: number;
       height?: number;
+      past_injuries?: string;
       fitness_level?: UserFitnessLevel;
       isOnBalancedDiet?: boolean;
       isAdmin: boolean;

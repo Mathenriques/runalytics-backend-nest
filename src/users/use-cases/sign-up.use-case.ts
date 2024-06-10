@@ -22,6 +22,7 @@ export class SignUpUseCase {
       height,
       weight,
       isAdmin,
+      past_injuries,
       isOnBalancedDiet,
     } = input;
 
@@ -46,6 +47,7 @@ export class SignUpUseCase {
         fitness_level,
         height,
         weight,
+        past_injuries,
         isAdmin,
         isOnBalancedDiet,
       });
