@@ -30,6 +30,7 @@ describe('Sign Up Use Case Teste', () => {
       birth_date: new Date(),
       diseases: '',
       fitness_level: UserFitnessLevel.ROOKIE,
+      past_injuries: 'Inflamação do tendão patelar do joelho esquerdo',
       height: 180,
       weight: 88,
       isAdmin: false,

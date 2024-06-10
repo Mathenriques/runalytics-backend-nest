@@ -54,6 +54,9 @@ export class User {
   fitness_level: UserFitnessLevel;
 
   @Column({ nullable: true })
+  past_injuries: string;
+
+  @Column({ nullable: true })
   isOnBalancedDiet: boolean;
 
   @Column()
@@ -72,6 +75,7 @@ export class User {
       diseases?: string;
       weight?: number;
       height?: number;
+      past_injuries?: string;
       fitness_level?: UserFitnessLevel;
       isOnBalancedDiet?: boolean;
       isAdmin: boolean;

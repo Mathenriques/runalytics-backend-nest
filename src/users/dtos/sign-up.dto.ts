@@ -33,6 +33,10 @@ export class SignUpDto {
   @IsOptional()
   diseases?: string;
 
+  @IsString()
+  @IsOptional()
+  past_injuries?: string;
+
   @IsNumber()
   @IsOptional()
   weight?: number;
