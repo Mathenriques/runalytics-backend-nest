@@ -14,7 +14,7 @@ export const dataSourceConfig: DataSourceOptions = {
   migrations: ['dist/migrations/*.js'],
   logging: true,
   ssl:
-    configService.get('NODE_ENV') === 'development'
+    configService.get('NODE_ENV') !== 'production'
       ? false
       : {
           rejectUnauthorized: false,
