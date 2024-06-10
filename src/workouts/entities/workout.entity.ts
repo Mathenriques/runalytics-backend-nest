@@ -31,6 +31,9 @@ export class Workout {
   pain_discomfort: string;
 
   @Column()
+  deletedDate: Date;
+
+  @Column()
   user_id: string;
 
   constructor(
@@ -43,6 +46,7 @@ export class Workout {
       sleep_hours: number;
       didMyofascialRelease: boolean;
       pain_discomfort: string;
+      deletedDate: Date;
       user_id: string;
     },
     id?: string,
