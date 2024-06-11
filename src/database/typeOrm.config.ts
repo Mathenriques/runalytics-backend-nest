@@ -12,7 +12,6 @@ export const dataSourceConfig: DataSourceOptions = {
   database: configService.get('DB_DATABASE') || 'runalytics',
   entities: ['dist/**/*.entity.js'],
   migrations: ['dist/migrations/*.js'],
-  logging: true,
   ssl:
     configService.get('NODE_ENV') !== 'production'
       ? false

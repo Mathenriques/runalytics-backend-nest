@@ -10,5 +10,5 @@ export interface IWorkoutRepository {
   getAllUserWorkouts(user_id: string): Promise<Workout[]>;
   findById(id: string): Promise<Workout>;
   update(data: Workout): Promise<Workout | null>;
-  delete(id: string): Promise<Workout>;
+  delete(id: string): Promise<number | null>;
 }

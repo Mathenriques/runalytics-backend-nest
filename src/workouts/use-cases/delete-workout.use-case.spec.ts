@@ -41,8 +41,8 @@ describe('Delete Workout Use Case Test', () => {
 
     const { id } = await createWorkoutUseCase.execute(workoutData);
 
-    const { deletedDate } = await useCase.execute(id);
-    expect(deletedDate).toBeDefined();
+    const result = await useCase.execute(id);
+    expect(result).toBe(1);
   });
 
   it('Should not be able to delete an workout that not exists', async () => {

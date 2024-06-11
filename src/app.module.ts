@@ -6,6 +6,7 @@ import { AuthModule } from './auth/auth.module';
 import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AppController } from './app.controller';
+import { WorkoutModule } from './workouts/workouts.module';
 
 @Module({
   imports: [
@@ -15,6 +16,7 @@ import { AppController } from './app.controller';
     }),
     DatabaseModule,
     UserModule,
+    WorkoutModule,
     AuthModule,
   ],
   controllers: [AppController],

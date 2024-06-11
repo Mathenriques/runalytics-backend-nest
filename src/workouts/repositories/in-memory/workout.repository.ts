@@ -41,11 +41,15 @@ export class WorkoutInMemoryRepository implements IWorkoutRepository {
     return this.items.find((item) => item.id === id);
   }
 
-  async delete(id: string): Promise<Workout> {
+  async delete(id: string): Promise<number | null> {
     const index = this.items.findIndex((item) => item.id === id);
 
-    this.items[index].deletedDate = new Date();
+    if (index) {
+      this.items[index].deletedDate = new Date();
 
-    return this.items[index];
+      return 1;
+    }
+
+    return null;
   }
 }
