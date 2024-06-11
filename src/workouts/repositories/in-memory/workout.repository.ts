@@ -22,4 +22,8 @@ export class WorkoutInMemoryRepository implements IWorkoutRepository {
 
     return workout;
   }
+
+  async getAllUserWorkouts(user_id: string): Promise<Workout[]> {
+    return this.items.filter((item) => item.user_id === user_id);
+  }
 }

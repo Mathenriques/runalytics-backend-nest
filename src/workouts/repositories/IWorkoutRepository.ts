@@ -7,4 +7,5 @@ export interface IWorkoutRepository {
     endDate: Date,
     user_id: string,
   ): Promise<Workout[]>;
+  getAllUserWorkouts(user_id: string): Promise<Workout[]>;
 }
