@@ -8,4 +8,6 @@ export interface IWorkoutRepository {
     user_id: string,
   ): Promise<Workout[]>;
   getAllUserWorkouts(user_id: string): Promise<Workout[]>;
+  findById(id: string): Promise<Workout>;
+  update(data: Workout): Promise<Workout | null>;
 }
