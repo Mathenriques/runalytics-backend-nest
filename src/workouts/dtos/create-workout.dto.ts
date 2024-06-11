@@ -34,9 +34,6 @@ export class CreateWorkoutDto {
   @IsString()
   pain_discomfort: string;
 
-  @IsDate()
-  deletedDate: Date;
-
   @IsString()
   user_id: string;
 }

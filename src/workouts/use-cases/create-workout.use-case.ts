@@ -12,13 +12,13 @@ export class CreateWorkoutUseCase {
   async execute(input: CreateWorkoutDto) {
     const { user_id, start_date, end_date } = input;
 
-    const workoutExists = this.workoutRepo.getWorkoutBetweenDates(
+    const workoutExists = await this.workoutRepo.getWorkoutBetweenDates(
       start_date,
       end_date,
       user_id,
     );
 
-    if (workoutExists) {
+    if (workoutExists.length >= 1) {
       throw new Error('Already exists an workout between these dates');
     }
 
@@ -26,8 +26,6 @@ export class CreateWorkoutUseCase {
 
     await this.workoutRepo.create(workout);
 
-    return {
-      workout,
-    };
+    return workout;
   }
 }

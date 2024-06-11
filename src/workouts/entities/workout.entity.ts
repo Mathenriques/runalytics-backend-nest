@@ -1,5 +1,5 @@
 import { randomUUID } from 'crypto';
-import { Column, Entity, PrimaryColumn } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, PrimaryColumn } from 'typeorm';
 
 @Entity('workouts')
 export class Workout {
@@ -30,8 +30,8 @@ export class Workout {
   @Column()
   pain_discomfort: string;
 
-  @Column()
-  deletedDate: Date;
+  @DeleteDateColumn()
+  deletedDate?: Date;
 
   @Column()
   user_id: string;
@@ -46,7 +46,7 @@ export class Workout {
       sleep_hours: number;
       didMyofascialRelease: boolean;
       pain_discomfort: string;
-      deletedDate: Date;
+      deletedDate?: Date;
       user_id: string;
     },
     id?: string,
