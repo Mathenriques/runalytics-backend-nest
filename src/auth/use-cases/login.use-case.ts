@@ -13,6 +13,7 @@ export class LoginUseCase {
       sub: user.id,
       email: user.email,
       name: user.name,
+      isAdmin: user.isAdmin,
     };
 
     const access_token = this.jwtService.sign(payload);
