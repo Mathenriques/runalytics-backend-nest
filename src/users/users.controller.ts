@@ -41,7 +41,12 @@ export class UsersController {
   }
 
   @Get()
-  getAllUsers(@Body() query: ArrayQuery) {
+  getAllUsers(@Param('page') page: number, @Param('quantity') quantity: number) {
+    const query = {
+      'skip': page,
+      'take': quantity
+    }
+    
     return this.getAllUsersUseCase.execute(query);
   }
 
