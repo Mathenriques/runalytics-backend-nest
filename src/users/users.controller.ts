@@ -6,6 +6,7 @@ import {
   Inject,
   Param,
   Post,
+  Query,
 } from '@nestjs/common';
 import { isPublic } from 'src/auth/decorators/is-public.decorator';
 import { SignUpDto } from './dtos/sign-up.dto';
@@ -41,12 +42,7 @@ export class UsersController {
   }
 
   @Get()
-  getAllUsers(@Param('page') page: number, @Param('quantity') quantity: number) {
-    const query = {
-      'skip': page,
-      'take': quantity
-    }
-    
+  getAllUsers(@Query() query) {
     return this.getAllUsersUseCase.execute(query);
   }
 
