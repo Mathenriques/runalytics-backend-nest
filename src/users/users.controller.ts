@@ -42,7 +42,7 @@ export class UsersController {
   }
 
   @Get()
-  getAllUsers(@Query() query) {
+  getAllUsers(@Query() query: ArrayQuery) {
     return this.getAllUsersUseCase.execute(query);
   }
 
