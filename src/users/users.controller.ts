@@ -6,6 +6,7 @@ import {
   Inject,
   Param,
   Post,
+  Query,
 } from '@nestjs/common';
 import { isPublic } from 'src/auth/decorators/is-public.decorator';
 import { SignUpDto } from './dtos/sign-up.dto';
@@ -41,7 +42,7 @@ export class UsersController {
   }
 
   @Get()
-  getAllUsers(@Body() query: ArrayQuery) {
+  getAllUsers(@Query() query: ArrayQuery) {
     return this.getAllUsersUseCase.execute(query);
   }
 

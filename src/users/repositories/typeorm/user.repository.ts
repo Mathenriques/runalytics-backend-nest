@@ -16,14 +16,14 @@ export class UserTypeOrmRepository implements IUserRepository {
   ) {}
 
   async getAllUsers(query: ArrayQuery): Promise<GetAllUsersReturn> {
-    const take = query.take || 10;
-    const skip = query.skip || 0;
+    // const take = query.take || 10;
+    // const skip = (query.skip) ? (query.skip - 1) * take : 0;
 
     const [result, total] = await this.typeOrmRepository.findAndCount({
       where: { isAdmin: false, deletedDate: null },
-      order: { name: 'DESC' },
-      take: take,
-      skip: skip,
+      order: { name: 'ASC' },
+      // take: take,
+      // skip: skip,
     });
 
     return {
