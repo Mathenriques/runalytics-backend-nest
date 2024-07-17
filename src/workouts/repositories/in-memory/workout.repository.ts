@@ -43,7 +43,6 @@ export class WorkoutInMemoryRepository implements IWorkoutRepository {
 
   async delete(id: string): Promise<number | null> {
     const index = this.items.findIndex((item) => item.id === id);
-    console.log(index);
 
     if (index !== -1) {
       this.items[index].deletedDate = new Date();

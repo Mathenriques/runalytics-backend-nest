@@ -1,7 +1,7 @@
-import { generateRandomSixDigitCode } from 'src/utils/utils';
 import { IUserRepository } from '../repositories/IUserRepository';
 import { Inject } from '@nestjs/common';
 import { User } from '../entities/user.entity';
+import { generateRandomSixDigitCode } from '../../utils/utils';
 
 export type RestorePasswordResponse = {
   code: string,

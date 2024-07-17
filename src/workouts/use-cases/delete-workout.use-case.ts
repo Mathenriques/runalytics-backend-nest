@@ -16,8 +16,6 @@ export class DeleteWorkoutUseCase {
 
     const workout = await this.workoutRepo.delete(id);
 
-    console.log(workout);
-
     return workout;
   }
 }
