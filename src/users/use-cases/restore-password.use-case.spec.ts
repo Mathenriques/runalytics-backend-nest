@@ -43,7 +43,8 @@ describe('Get User Profile Use Case Teste', () => {
     const { email } = await signUpUseCase.execute(userData);
     const { code, message } = await useCase.execute(email);
 
-    expect(email).toBe(userData.email);
+    expect(code.length).toBe(6);
+    expect(message).toBe(`Olá ${userData.name}, aqui está seu codigo de recuperação de senha`);
   });
 
   it('Should not be able to get data from non-existent user', async () => {
