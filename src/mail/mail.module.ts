@@ -1,8 +1,6 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
-import { HandlebarsAdapter } from '@nestjs-modules/mailer/dist/adapters/handlebars.adapter';
-import { join } from 'path';
 import { MailController } from './mail.controller';
 import { EmailService } from './mail.service';
 
@@ -21,10 +19,9 @@ import { EmailService } from './mail.service';
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASSWORD,
         },
+        logger: true,
+        debug: true,
       },
-      defaults: {
-        from: '"TESTEE" <noreply@example.com>',
-      }
     }),
   ],
   providers: [EmailService],

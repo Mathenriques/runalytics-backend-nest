@@ -8,12 +8,10 @@ export class EmailService {
   async sendTestEmail() {
     try {
       await this.mailerService.sendMail({
-        to: 'recipient@example.com', // Replace with recipient email
-        subject: 'Test Email',
-        template: './test', // The template to use
-        context: { // Data to be sent to template
-          name: 'Recipient Name',
-        },
+        from: 'Runalytics <theusitosgames@outlook.com>',
+        to: 'math.marqui@gmail.com',
+        subject: `How to Send Emails with Nodemailer`,
+        text: 'TESTE',
       });
       console.log('Email sent successfully');
     } catch (error) {
