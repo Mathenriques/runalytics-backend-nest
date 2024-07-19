@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Inject } from '@nestjs/common';
-import { isPublic } from 'src/auth/decorators/is-public.decorator';
 import { SendEmailUseCase } from './use-cases/send-email.use-case';
 import { SendEmailDto } from './dtos/send-email.dto';
 
