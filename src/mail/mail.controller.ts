@@ -9,7 +9,6 @@ export class MailController {
   @Inject(SendEmailUseCase)
   private readonly sendEmailUseCase: SendEmailUseCase;
 
-  @isPublic()
   @Get('send-email')
   async sendEmail(@Body() bodyData: SendEmailDto) {
     return await this.sendEmailUseCase.execute(bodyData);
