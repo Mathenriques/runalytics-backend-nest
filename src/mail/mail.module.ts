@@ -2,7 +2,6 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailController } from './mail.controller';
-import { RestorePasswordUseCase } from 'src/users/use-cases/generate-code-restore-password.use-case';
 import { SendEmailUseCase } from './use-cases/send-email.use-case';
 
 @Module({

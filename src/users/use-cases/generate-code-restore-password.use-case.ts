@@ -8,13 +8,14 @@ export type RestorePasswordResponse = {
   message: string
 }
 
-export class RestorePasswordUseCase {
+export class GenerateRecoveryCode {
   constructor(
     @Inject('IUserRepository')
     private readonly userRepo: IUserRepository,
   ) {}
 
   async execute(email: string): Promise<RestorePasswordResponse> {
+    console.log(email);
     const user: User = await this.userRepo.findByEmail(email);
 
     if (!user) {

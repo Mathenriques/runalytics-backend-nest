@@ -15,6 +15,7 @@ import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
 import { ArrayQuery } from './repositories/IUserRepository';
+import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
 
 @Controller('users')
 export class UsersController {
@@ -29,6 +30,9 @@ export class UsersController {
 
   @Inject(RemoveUserUseCase)
   private readonly removeUserUseCase: RemoveUserUseCase;
+  
+  @Inject(GenerateRecoveryCode)
+  private readonly generateRecoveryCode: GenerateRecoveryCode;
 
   @isPublic()
   @Post()
@@ -49,5 +53,11 @@ export class UsersController {
   @Delete(':id')
   removeUser(@Param('id') id: string) {
     return this.removeUserUseCase.execute(id);
+  }
+
+  @Get('email-recovery')
+  sendEmailRecoverPassword(@Body('email') email: string) {
+    const data = this.generateRecoveryCode.execute(email);
+    console.log(data);
   }
 }
