@@ -8,6 +8,7 @@ import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
+import { RestorePasswordUseCase } from './use-cases/restore-password.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -18,6 +19,7 @@ import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
     RemoveUserUseCase,
     GetAllUsersUseCase,
     UserTypeOrmRepository,
+    RestorePasswordUseCase,
     {
       provide: 'IUserRepository',
       useExisting: UserTypeOrmRepository,
@@ -28,6 +30,7 @@ import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
     TypeOrmModule.forFeature([User]),
     ValidateUserUseCase,
     UserTypeOrmRepository,
+    RestorePasswordUseCase,
     {
       provide: 'IUserRepository',
       useExisting: UserTypeOrmRepository,

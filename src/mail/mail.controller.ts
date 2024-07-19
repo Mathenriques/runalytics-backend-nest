@@ -1,15 +1,16 @@
-import { Controller, Get } from '@nestjs/common';
-import { EmailService } from './mail.service';
+import { Body, Controller, Get, Inject } from '@nestjs/common';
 import { isPublic } from 'src/auth/decorators/is-public.decorator';
+import { SendEmailUseCase } from './use-cases/send-email.use-case';
+import { SendEmailDto } from './dtos/send-email.dto';
 
 @Controller('mail')
 export class MailController {
-  constructor(private readonly emailService: EmailService) {}
 
-  @isPublic()
+  @Inject(SendEmailUseCase)
+  private readonly sendEmailUseCase: SendEmailUseCase;
+
   @Get('send-email')
-  async sendEmail() {
-    await this.emailService.sendTestEmail();
-    return 'Email sent';
+  async sendEmail(@Body() bodyData: SendEmailDto) {
+    return await this.sendEmailUseCase.execute(bodyData);
   }
 }

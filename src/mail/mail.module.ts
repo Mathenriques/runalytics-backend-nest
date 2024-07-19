@@ -2,7 +2,8 @@ import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MailerModule } from '@nestjs-modules/mailer';
 import { MailController } from './mail.controller';
-import { EmailService } from './mail.service';
+import { RestorePasswordUseCase } from 'src/users/use-cases/restore-password.use-case';
+import { SendEmailUseCase } from './use-cases/send-email.use-case';
 
 @Module({
   imports: [
@@ -19,12 +20,12 @@ import { EmailService } from './mail.service';
           user: process.env.EMAIL_USER,
           pass: process.env.EMAIL_PASSWORD,
         },
-        logger: true,
-        debug: true,
       },
     }),
   ],
-  providers: [EmailService],
+  providers: [
+    SendEmailUseCase,
+  ],
   controllers: [MailController],
 })
 export class MailModule {}
