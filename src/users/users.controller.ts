@@ -16,6 +16,8 @@ import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
 import { ArrayQuery } from './repositories/IUserRepository';
 import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
+import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
+import { SendEmailDto } from 'src/mail/dtos/send-email.dto';
 
 @Controller('users')
 export class UsersController {
@@ -34,13 +36,16 @@ export class UsersController {
   @Inject(GenerateRecoveryCode)
   private readonly generateRecoveryCode: GenerateRecoveryCode;
 
+  @Inject(SendEmailUseCase)
+  private readonly sendEmail: SendEmailUseCase;
+
   @isPublic()
   @Post()
   signup(@Body() signUpDto: SignUpDto) {
     return this.signUpUseCase.execute(signUpDto);
   }
 
-  @Get(':id')
+  @Get('profile/:id')
   getUserData(@Param('id') id: string) {
     return this.getUserProfileUseCase.execute(id);
   }
@@ -55,9 +60,19 @@ export class UsersController {
     return this.removeUserUseCase.execute(id);
   }
 
+  @isPublic()
   @Get('email-recovery')
-  sendEmailRecoverPassword(@Body('email') email: string) {
-    const data = this.generateRecoveryCode.execute(email);
-    console.log(data);
+  async sendEmailRecoverPassword(@Body('email') email: string) {
+    const { code, name } = await this.generateRecoveryCode.execute(email);
+    const emailDto: SendEmailDto = {
+      email,
+      subject: 'Recuperação de Senha',
+      templateName: 'recover-password',
+      variables: {
+        name,
+        code
+      }
+    }
+    this.sendEmail.execute(emailDto)
   }
 }

@@ -9,6 +9,7 @@ import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
 import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
+import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
@@ -20,6 +21,7 @@ import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password
     GetAllUsersUseCase,
     UserTypeOrmRepository,
     GenerateRecoveryCode,
+    SendEmailUseCase,
     {
       provide: 'IUserRepository',
       useExisting: UserTypeOrmRepository,

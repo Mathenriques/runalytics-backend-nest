@@ -26,5 +26,8 @@ import { SendEmailUseCase } from './use-cases/send-email.use-case';
     SendEmailUseCase,
   ],
   controllers: [MailController],
+  exports: [
+    SendEmailUseCase
+  ]
 })
 export class MailModule {}

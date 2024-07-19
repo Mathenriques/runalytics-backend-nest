@@ -15,7 +15,6 @@ export class SendEmailUseCase {
 
     try {
       const templatePath = path.resolve(__dirname, '..', 'templates', `${templateName}.html`);
-      console.log(templatePath);
       let html = fs.readFileSync(templatePath, 'utf8');
 
       // Substitui as variáveis no template

@@ -5,6 +5,7 @@ import { generateRandomSixDigitCode } from '../../utils/utils';
 
 export type RestorePasswordResponse = {
   code: string,
+  name: string,
   message: string
 }
 
@@ -15,7 +16,6 @@ export class GenerateRecoveryCode {
   ) {}
 
   async execute(email: string): Promise<RestorePasswordResponse> {
-    console.log(email);
     const user: User = await this.userRepo.findByEmail(email);
 
     if (!user) {
@@ -26,7 +26,8 @@ export class GenerateRecoveryCode {
     
     return {
       code,
-      message: `Olá ${user.name}, aqui está seu codigo de recuperação de senha`
+      name: user.name,
+      message: `Olá ${'user.name'}, aqui está seu codigo de recuperação de senha`
     };
   }
 }
