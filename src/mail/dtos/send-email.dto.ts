@@ -1,4 +1,4 @@
-import {IsEmail, IsString} from 'class-validator';
+import {IsArray, IsEmail, IsObject, IsString} from 'class-validator';
 
 export class SendEmailDto {
   @IsString()
@@ -6,8 +6,12 @@ export class SendEmailDto {
   email: string;
 
   @IsString()
-  text: string;
+  subject: string;
+
 
   @IsString()
-  subject: string;
+  templateName: string;
+
+  @IsObject()
+  variables: object;
 }

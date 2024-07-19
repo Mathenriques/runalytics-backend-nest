@@ -1,6 +1,8 @@
 import { MailerService } from "@nestjs-modules/mailer";
 import { SendEmailDto } from "../dtos/send-email.dto";
 import { Inject } from "@nestjs/common";
+import * as fs from 'fs';
+import * as path from 'path';
 
 export class SendEmailUseCase {
   constructor(
@@ -9,14 +11,24 @@ export class SendEmailUseCase {
   ) {}
 
   async execute(sendEmailDto: SendEmailDto) {
-    const { email, subject, text } = sendEmailDto;
+    const { email, subject, variables, templateName } = sendEmailDto;
 
     try {
+      const templatePath = path.resolve(__dirname, '..', 'templates', `${templateName}.html`);
+      console.log(templatePath);
+      let html = fs.readFileSync(templatePath, 'utf8');
+
+      // Substitui as variáveis no template
+      Object.keys(variables).forEach(key => {
+        const regex = new RegExp(`{{${key}}}`, 'g');
+        html = html.replace(regex, variables[key]);
+      });
+
       await this.mailerService.sendMail({
         from: 'Runalytics <theusitosgames@outlook.com>',
         to: email,
         subject,
-        text
+        html
       });
       
       return {
