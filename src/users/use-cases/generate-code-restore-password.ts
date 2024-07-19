@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { SignUpUseCase } from './sign-up.use-case';
 import { UserInMemoryRepository } from '../repositories/in_memory/user.repository';
 import { UserFitnessLevel, UserGender } from '../entities/user.entity';
-import { RestorePasswordUseCase } from './restore-password.use-case';
+import { RestorePasswordUseCase } from './generate-code-restore-password.use-case';
 
 describe('Get User Profile Use Case Teste', () => {
   let useCase: RestorePasswordUseCase;

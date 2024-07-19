@@ -8,7 +8,7 @@ import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
-import { RestorePasswordUseCase } from './use-cases/restore-password.use-case';
+import { RestorePasswordUseCase } from './use-cases/generate-code-restore-password.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([User])],
