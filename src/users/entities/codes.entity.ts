@@ -1,3 +1,4 @@
+import { randomUUID } from "crypto";
 import { Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity('codes')
@@ -11,8 +12,9 @@ export class Code {
   constructor(
     props: {
       code: string;
-    }
+    },
+    id?: string,
   ) {
-    Object.assign(this, props);
+    Object.assign(this, props), (this.id = id ?? randomUUID());
   }
 }
