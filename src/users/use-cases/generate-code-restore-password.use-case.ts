@@ -36,7 +36,7 @@ export class GenerateRecoveryCode {
     return {
       code,
       name: user.name,
-      message: `Olá ${'user.name'}, aqui está seu codigo de recuperação de senha`
+      message: `Olá ${user.name}, aqui está seu codigo de recuperação de senha`
     };
   }
 }

@@ -3,6 +3,7 @@ import { SignUpUseCase } from './sign-up.use-case';
 import { UserInMemoryRepository } from '../repositories/in_memory/user.repository';
 import { UserFitnessLevel, UserGender } from '../entities/user.entity';
 import { GenerateRecoveryCode } from './generate-code-restore-password.use-case';
+import { CodeInMemoryRepository } from '../repositories/in_memory/code.repository';
 
 describe('Get User Profile Use Case Teste', () => {
   let useCase: GenerateRecoveryCode;
@@ -14,9 +15,14 @@ describe('Get User Profile Use Case Teste', () => {
         SignUpUseCase,
         GenerateRecoveryCode,
         UserInMemoryRepository,
+        CodeInMemoryRepository,
         {
           provide: 'IUserRepository',
           useExisting: UserInMemoryRepository,
+        },
+        {
+          provide: 'ICodeRepository',
+          useExisting: CodeInMemoryRepository,
         },
       ],
     }).compile();
