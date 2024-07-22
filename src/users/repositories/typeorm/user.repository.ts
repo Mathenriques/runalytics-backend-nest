@@ -45,6 +45,7 @@ export class UserTypeOrmRepository implements IUserRepository {
       },
     });
   }
+  
   async findById(id: string): Promise<User> {
     return this.typeOrmRepository.findOneBy({ id });
   }
