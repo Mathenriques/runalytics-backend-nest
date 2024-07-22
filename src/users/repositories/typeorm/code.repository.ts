@@ -6,7 +6,7 @@ import { Code } from "src/users/entities/codes.entity";
 export class CodeTypeOrmRepository implements ICodeRepository {
   constructor(
     @InjectRepository(Code)
-    private typeOrmRepository: Repository<Code>
+    private typeOrmRepository: Repository<Code>,
   ) {}
 
   async create(code: Code): Promise<void> {
