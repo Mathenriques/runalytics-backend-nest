@@ -9,20 +9,28 @@ import {
 
 export class UserInMemoryRepository implements IUserRepository {
   public items: User[] = [];
-
+  
   async getAllUsers(query: ArrayQuery): Promise<GetAllUsersReturn> {
     const users = this.items.filter(
       (item) => !item.isAdmin && item.deletedDate === null,
     );
-
+    
     const startIndex = query.skip;
     const endIndex = query.skip + query.take;
     const usersPaginated = users.slice(startIndex, endIndex);
-
+    
     return {
       data: usersPaginated,
       count: users.length,
     };
+  }
+  
+  async updateUserPassword(id: string, password: string): Promise<void> {
+    const index = this.items.findIndex(user => user.id === id);
+
+    if (index !== -1) {
+      this.items[index] = { ...this.items[index], password_hash: password };
+    }
   }
 
   async countAdminUsers(): Promise<number> {
