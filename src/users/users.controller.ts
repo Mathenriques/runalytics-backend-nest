@@ -70,6 +70,7 @@ export class UsersController {
     return this.removeUserUseCase.execute(id);
   }
 
+  @isPublic()
   @Post('email-recovery')
   async sendEmailRecoverPassword(@Body('email') email: string) {
     const { code, name } = await this.generateRecoveryCode.execute(email);
@@ -84,12 +85,14 @@ export class UsersController {
     }
     this.sendEmail.execute(emailDto)
   }
-
+  
+  @isPublic()
   @Get('validate-code')
   verifyCodePassword(@Body('code') code: string) {
     return this.validateCode.execute(code);
   }
 
+  @isPublic()
   @Patch('restore-password')
   restorePassword(@Body() restoreData: RestorePasswordDto) {
     return this.restorePasswordUseCase.execute(restoreData.email, restoreData.password, restoreData.code)
