@@ -87,7 +87,7 @@ export class UsersController {
   }
   
   @isPublic()
-  @Get('validate-code')
+  @Post('validate-code')
   verifyCodePassword(@Body('code') code: string) {
     return this.validateCode.execute(code);
   }
