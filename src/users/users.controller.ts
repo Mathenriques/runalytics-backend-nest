@@ -5,6 +5,7 @@ import {
   Get,
   Inject,
   Param,
+  Patch,
   Post,
   Query,
 } from '@nestjs/common';
@@ -18,6 +19,9 @@ import { ArrayQuery } from './repositories/IUserRepository';
 import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
 import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
 import { SendEmailDto } from 'src/mail/dtos/send-email.dto';
+import { ValidateCodeRestorePasswordUseCase } from './use-cases/validate-code-restore-password.use-case';
+import { ResetPasswordUseCase } from './use-cases/restore-password.use-case';
+import { RestorePasswordDto } from './dtos/restore-password.dto';
 
 @Controller('users')
 export class UsersController {
@@ -38,6 +42,12 @@ export class UsersController {
 
   @Inject(SendEmailUseCase)
   private readonly sendEmail: SendEmailUseCase;
+  
+  @Inject(ValidateCodeRestorePasswordUseCase)
+  private readonly validateCode: ValidateCodeRestorePasswordUseCase;
+  
+  @Inject(ResetPasswordUseCase)
+  private readonly restorePasswordUseCase: ResetPasswordUseCase;
 
   @isPublic()
   @Post()
@@ -60,7 +70,6 @@ export class UsersController {
     return this.removeUserUseCase.execute(id);
   }
 
-  @isPublic()
   @Get('email-recovery')
   async sendEmailRecoverPassword(@Body('email') email: string) {
     const { code, name } = await this.generateRecoveryCode.execute(email);
@@ -74,5 +83,15 @@ export class UsersController {
       }
     }
     this.sendEmail.execute(emailDto)
+  }
+
+  @Get('validate-code')
+  verifyCodePassword(@Body('code') code: string) {
+    return this.validateCode.execute(code);
+  }
+
+  @Patch('restore-password')
+  restorePassword(@Body() restoreData: RestorePasswordDto) {
+    return this.restorePasswordUseCase.execute(restoreData.email, restoreData.password, restoreData.code)
   }
 }
