@@ -70,7 +70,7 @@ export class UsersController {
     return this.removeUserUseCase.execute(id);
   }
 
-  @Get('email-recovery')
+  @Post('email-recovery')
   async sendEmailRecoverPassword(@Body('email') email: string) {
     const { code, name } = await this.generateRecoveryCode.execute(email);
     const emailDto: SendEmailDto = {
