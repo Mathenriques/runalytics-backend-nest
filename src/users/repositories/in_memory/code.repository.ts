@@ -1,6 +1,5 @@
 import { randomUUID } from 'crypto';
 
-import { User } from 'src/users/entities/user.entity';
 import { ICodeRepository } from '../ICodeRepository';
 import { Code } from 'src/users/entities/codes.entity';
 

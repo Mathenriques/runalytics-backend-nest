@@ -1,7 +1,7 @@
 import { Inject } from '@nestjs/common';
 import { ICodeRepository } from '../repositories/ICodeRepository';
 
-export class ResetPasswordUseCase {
+export class ValidateCodeRestorePasswordUseCase {
   constructor(
     @Inject('ICodeRepository')
     private readonly codeRepo: ICodeRepository,
