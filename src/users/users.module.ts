@@ -8,9 +8,17 @@ import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
+import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
+import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
+import { CodeTypeOrmRepository } from './repositories/typeorm/code.repository';
+import { Code } from './entities/codes.entity';
+import { ValidateCodeRestorePasswordUseCase } from './use-cases/validate-code-restore-password.use-case';
+import { ResetPasswordUseCase } from './use-cases/restore-password.use-case';
 
 @Module({
-  imports: [TypeOrmModule.forFeature([User])],
+  imports: [
+    TypeOrmModule.forFeature([User, Code])
+  ],
   providers: [
     SignUpUseCase,
     ValidateUserUseCase,
@@ -18,9 +26,19 @@ import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
     RemoveUserUseCase,
     GetAllUsersUseCase,
     UserTypeOrmRepository,
+    CodeTypeOrmRepository,
+    GenerateRecoveryCode,
+    ValidateUserUseCase,
+    ValidateCodeRestorePasswordUseCase,
+    ResetPasswordUseCase,
+    SendEmailUseCase,
     {
       provide: 'IUserRepository',
       useExisting: UserTypeOrmRepository,
+    },
+    {
+      provide: 'ICodeRepository',
+      useExisting: CodeTypeOrmRepository,
     },
   ],
   controllers: [UsersController],
@@ -28,6 +46,7 @@ import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
     TypeOrmModule.forFeature([User]),
     ValidateUserUseCase,
     UserTypeOrmRepository,
+    GenerateRecoveryCode,
     {
       provide: 'IUserRepository',
       useExisting: UserTypeOrmRepository,

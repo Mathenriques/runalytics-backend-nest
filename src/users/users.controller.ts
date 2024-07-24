@@ -5,6 +5,7 @@ import {
   Get,
   Inject,
   Param,
+  Patch,
   Post,
   Query,
 } from '@nestjs/common';
@@ -15,6 +16,12 @@ import { GetUserProfileUseCase } from './use-cases/get-user-profile.use-case';
 import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
 import { ArrayQuery } from './repositories/IUserRepository';
+import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
+import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
+import { SendEmailDto } from 'src/mail/dtos/send-email.dto';
+import { ValidateCodeRestorePasswordUseCase } from './use-cases/validate-code-restore-password.use-case';
+import { ResetPasswordUseCase } from './use-cases/restore-password.use-case';
+import { RestorePasswordDto } from './dtos/restore-password.dto';
 
 @Controller('users')
 export class UsersController {
@@ -29,6 +36,18 @@ export class UsersController {
 
   @Inject(RemoveUserUseCase)
   private readonly removeUserUseCase: RemoveUserUseCase;
+  
+  @Inject(GenerateRecoveryCode)
+  private readonly generateRecoveryCode: GenerateRecoveryCode;
+
+  @Inject(SendEmailUseCase)
+  private readonly sendEmail: SendEmailUseCase;
+  
+  @Inject(ValidateCodeRestorePasswordUseCase)
+  private readonly validateCode: ValidateCodeRestorePasswordUseCase;
+  
+  @Inject(ResetPasswordUseCase)
+  private readonly restorePasswordUseCase: ResetPasswordUseCase;
 
   @isPublic()
   @Post()
@@ -36,7 +55,7 @@ export class UsersController {
     return this.signUpUseCase.execute(signUpDto);
   }
 
-  @Get(':id')
+  @Get('profile/:id')
   getUserData(@Param('id') id: string) {
     return this.getUserProfileUseCase.execute(id);
   }
@@ -49,5 +68,33 @@ export class UsersController {
   @Delete(':id')
   removeUser(@Param('id') id: string) {
     return this.removeUserUseCase.execute(id);
+  }
+
+  @isPublic()
+  @Post('email-recovery')
+  async sendEmailRecoverPassword(@Body('email') email: string) {
+    const { code, name } = await this.generateRecoveryCode.execute(email);
+    const emailDto: SendEmailDto = {
+      email,
+      subject: 'Recuperação de Senha',
+      templateName: 'recover-password',
+      variables: {
+        name,
+        code
+      }
+    }
+    this.sendEmail.execute(emailDto)
+  }
+  
+  @isPublic()
+  @Post('validate-code')
+  verifyCodePassword(@Body('code') code: string) {
+    return this.validateCode.execute(code);
+  }
+
+  @isPublic()
+  @Patch('restore-password')
+  restorePassword(@Body() restoreData: RestorePasswordDto) {
+    return this.restorePasswordUseCase.execute(restoreData.email, restoreData.password, restoreData.code)
   }
 }

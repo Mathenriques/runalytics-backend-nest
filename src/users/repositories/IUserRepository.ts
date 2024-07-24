@@ -17,4 +17,5 @@ export interface IUserRepository {
   countAdminUsers(): Promise<number>;
   removeUser(id: string): Promise<number | null>;
   getAllUsers(query: ArrayQuery): Promise<GetAllUsersReturn>;
+  updateUserPassword(id: string, password: string): Promise<void>
 }

@@ -33,4 +33,3 @@ services:
       - POSTGRES_USERNAME=postgres
       - POSTGRES_PASSWORD=postgres
       - POSTGRES_DATABASE=runalytics
-    

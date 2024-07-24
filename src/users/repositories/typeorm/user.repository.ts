@@ -15,6 +15,10 @@ export class UserTypeOrmRepository implements IUserRepository {
     private typeOrmRepository: Repository<User>,
   ) {}
 
+  async updateUserPassword(id: string, password: string): Promise<void> {
+    await this.typeOrmRepository.update(id, {password_hash: password})
+  }
+
   async getAllUsers(query: ArrayQuery): Promise<GetAllUsersReturn> {
     // const take = query.take || 10;
     // const skip = (query.skip) ? (query.skip - 1) * take : 0;
@@ -45,6 +49,7 @@ export class UserTypeOrmRepository implements IUserRepository {
       },
     });
   }
+  
   async findById(id: string): Promise<User> {
     return this.typeOrmRepository.findOneBy({ id });
   }
