@@ -24,7 +24,7 @@ export class UserTypeOrmRepository implements IUserRepository {
     // const skip = (query.skip) ? (query.skip - 1) * take : 0;
 
     const [result, total] = await this.typeOrmRepository.findAndCount({
-      where: { isAdmin: false, deletedDate: null },
+      where: { deletedDate: null },
       order: { name: 'ASC' },
       // take: take,
       // skip: skip,
