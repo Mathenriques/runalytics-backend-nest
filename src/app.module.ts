@@ -7,7 +7,6 @@ import { APP_GUARD } from '@nestjs/core';
 import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
 import { AppController } from './app.controller';
 import { WorkoutModule } from './workouts/workouts.module';
-import { MailModule } from './mail/mail.module';
 
 @Module({
   imports: [
@@ -19,7 +18,6 @@ import { MailModule } from './mail/mail.module';
     UserModule,
     WorkoutModule,
     AuthModule,
-    MailModule
   ],
   controllers: [AppController],
   providers: [
