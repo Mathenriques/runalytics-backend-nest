@@ -17,8 +17,6 @@ import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
 import { ArrayQuery } from './repositories/IUserRepository';
 import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
-import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
-import { SendEmailDto } from 'src/mail/dtos/send-email.dto';
 import { ValidateCodeRestorePasswordUseCase } from './use-cases/validate-code-restore-password.use-case';
 import { ResetPasswordUseCase } from './use-cases/restore-password.use-case';
 import { RestorePasswordDto } from './dtos/restore-password.dto';
@@ -36,16 +34,13 @@ export class UsersController {
 
   @Inject(RemoveUserUseCase)
   private readonly removeUserUseCase: RemoveUserUseCase;
-  
+
   @Inject(GenerateRecoveryCode)
   private readonly generateRecoveryCode: GenerateRecoveryCode;
 
-  @Inject(SendEmailUseCase)
-  private readonly sendEmail: SendEmailUseCase;
-  
   @Inject(ValidateCodeRestorePasswordUseCase)
   private readonly validateCode: ValidateCodeRestorePasswordUseCase;
-  
+
   @Inject(ResetPasswordUseCase)
   private readonly restorePasswordUseCase: ResetPasswordUseCase;
 
@@ -71,22 +66,6 @@ export class UsersController {
   }
 
   @isPublic()
-  @Post('email-recovery')
-  async sendEmailRecoverPassword(@Body('email') email: string) {
-    const { code, name } = await this.generateRecoveryCode.execute(email);
-    const emailDto: SendEmailDto = {
-      email,
-      subject: 'Recuperação de Senha',
-      templateName: 'recover-password',
-      variables: {
-        name,
-        code
-      }
-    }
-    this.sendEmail.execute(emailDto)
-  }
-  
-  @isPublic()
   @Post('validate-code')
   verifyCodePassword(@Body('code') code: string) {
     return this.validateCode.execute(code);
@@ -95,6 +74,10 @@ export class UsersController {
   @isPublic()
   @Patch('restore-password')
   restorePassword(@Body() restoreData: RestorePasswordDto) {
-    return this.restorePasswordUseCase.execute(restoreData.email, restoreData.password, restoreData.code)
+    return this.restorePasswordUseCase.execute(
+      restoreData.email,
+      restoreData.password,
+      restoreData.code,
+    );
   }
 }

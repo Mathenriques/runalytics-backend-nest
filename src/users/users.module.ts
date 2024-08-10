@@ -9,16 +9,13 @@ import { RemoveUserUseCase } from './use-cases/remove-user.use-case';
 import { UserTypeOrmRepository } from './repositories/typeorm/user.repository';
 import { GetAllUsersUseCase } from './use-cases/get-all-users.use-case';
 import { GenerateRecoveryCode } from './use-cases/generate-code-restore-password.use-case';
-import { SendEmailUseCase } from 'src/mail/use-cases/send-email.use-case';
 import { CodeTypeOrmRepository } from './repositories/typeorm/code.repository';
 import { Code } from './entities/codes.entity';
 import { ValidateCodeRestorePasswordUseCase } from './use-cases/validate-code-restore-password.use-case';
 import { ResetPasswordUseCase } from './use-cases/restore-password.use-case';
 
 @Module({
-  imports: [
-    TypeOrmModule.forFeature([User, Code])
-  ],
+  imports: [TypeOrmModule.forFeature([User, Code])],
   providers: [
     SignUpUseCase,
     ValidateUserUseCase,
@@ -31,7 +28,6 @@ import { ResetPasswordUseCase } from './use-cases/restore-password.use-case';
     ValidateUserUseCase,
     ValidateCodeRestorePasswordUseCase,
     ResetPasswordUseCase,
-    SendEmailUseCase,
     {
       provide: 'IUserRepository',
       useExisting: UserTypeOrmRepository,
