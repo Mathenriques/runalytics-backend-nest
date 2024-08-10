@@ -36,6 +36,7 @@ describe('Update Workout Use Case Test', () => {
       stress_level: 5,
       sleep_hours: 8,
       pain_discomfort: '',
+      diet_level: 1,
       didMyofascialRelease: true,
       user_id: 'XXX',
     };
@@ -50,6 +51,7 @@ describe('Update Workout Use Case Test', () => {
       strengthening_workouts: 3,
       stress_level: 5,
       sleep_hours: 8,
+      diet_level: 1,
       pain_discomfort: '',
       didMyofascialRelease: true,
       user_id: 'XXX',
@@ -72,6 +74,7 @@ describe('Update Workout Use Case Test', () => {
       strengthening_workouts: 3,
       stress_level: 5,
       sleep_hours: 8,
+      diet_level: 1,
       pain_discomfort: '',
       didMyofascialRelease: true,
       user_id: 'XXX',

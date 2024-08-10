@@ -35,6 +35,7 @@ describe('Delete Workout Use Case Test', () => {
       stress_level: 5,
       sleep_hours: 8,
       pain_discomfort: '',
+      diet_level: 1,
       didMyofascialRelease: true,
       user_id: 'XXX',
     };
