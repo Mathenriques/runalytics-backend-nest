@@ -28,6 +28,9 @@ export class CreateWorkoutDto {
   @IsNumber()
   sleep_hours: number;
 
+  @IsNumber()
+  diet_level: number;
+
   @IsBoolean()
   didMyofascialRelease: boolean;
 
