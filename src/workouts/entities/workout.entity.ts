@@ -22,6 +22,9 @@ export class Workout {
   stress_level: number;
 
   @Column()
+  diet_level: number;
+
+  @Column()
   sleep_hours: number;
 
   @Column()
