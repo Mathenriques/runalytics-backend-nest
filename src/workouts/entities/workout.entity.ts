@@ -45,6 +45,7 @@ export class Workout {
       end_date: Date;
       weekly_volume: number;
       strengthening_workouts: number;
+      diet_level: number;
       stress_level: number;
       sleep_hours: number;
       didMyofascialRelease: boolean;
