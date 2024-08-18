@@ -15,6 +15,7 @@ import { UpdateWorkoutUseCase } from './use-cases/update-workout.use-case';
 import { CreateWorkoutDto } from './dtos/create-workout.dto';
 import { GetUserProfileUseCase } from 'src/users/use-cases/get-user-profile.use-case';
 import { UpdateWorkoutDto } from './dtos/update-workout.dto';
+import { CompareWorkoutsUseCase } from './use-cases/compare-workouts.use-case';
 
 @Controller('workouts')
 export class WorkoutController {
@@ -33,16 +34,24 @@ export class WorkoutController {
   @Inject(UpdateWorkoutUseCase)
   private readonly updateWorkoutUseCase: UpdateWorkoutUseCase;
 
+  @Inject(CompareWorkoutsUseCase)
+  private readonly compareWorkoutsUseCase: CompareWorkoutsUseCase;
+
   @Post()
   create(@Body() createWorkoutDto: CreateWorkoutDto) {
     return this.createWorkoutUseCase.execute(createWorkoutDto);
   }
 
   @Get(':user_id')
-  getUserWorkout(@Param('user_id') id: string) {
+  async getUserWorkout(@Param('user_id') id: string) {
     this.getUserProfileUseCase.execute(id);
 
-    return this.getAllUserWorkouts.execute(id);
+    const [workouts, compareWorkouts] = await Promise.all([
+      this.getAllUserWorkouts.execute(id),
+      this.compareWorkoutsUseCase.execute(id),
+    ]);
+
+    return { workouts, compareWorkouts };
   }
 
   @Put()
@@ -51,7 +60,7 @@ export class WorkoutController {
   }
 
   @Delete(':id')
-  removeUser(@Param('id') id: string) {
+  removeWOrkout(@Param('id') id: string) {
     return this.deleteWorkoutUseCase.execute(id);
   }
 }
