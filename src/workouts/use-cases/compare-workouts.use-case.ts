@@ -12,7 +12,10 @@ export type WorkoutFeedback = Omit<
   | 'user_id'
   | 'didMyofascialRelease'
 >;
-
+export type WorkoutItems = {
+  status: 'Bom' | 'Médio' | 'Ruim';
+  value: number;
+};
 export class CompareWorkoutsUseCase {
   constructor(
     @Inject('IWorkoutRepository')

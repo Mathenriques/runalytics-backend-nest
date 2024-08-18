@@ -1,5 +1,6 @@
 import { Workout } from 'src/workouts/entities/workout.entity';
 import { IWorkoutRepository } from '../IWorkoutRepository';
+import { WorkoutFeedback } from 'src/workouts/use-cases/compare-workouts.use-case';
 
 export class WorkoutInMemoryRepository implements IWorkoutRepository {
   public items: Workout[] = [];
@@ -27,6 +28,18 @@ export class WorkoutInMemoryRepository implements IWorkoutRepository {
     return this.items.filter(
       (item) => item.user_id === user_id && item.deletedDate === undefined,
     );
+  }
+
+  async getLastTwoOnes(user_id: string): Promise<WorkoutFeedback[]> {
+    const userWorkouts = this.items.filter(
+      (workout) => workout.user_id === user_id && workout.deletedDate === null,
+    );
+
+    const sortedWorkouts = userWorkouts.sort(
+      (a, b) => b.start_date.getTime() - a.start_date.getTime(),
+    );
+
+    return sortedWorkouts.slice(0, 2);
   }
 
   async update(data: Workout): Promise<Workout> {
