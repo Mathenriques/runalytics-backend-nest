@@ -32,7 +32,7 @@ export class WorkoutInMemoryRepository implements IWorkoutRepository {
 
   async getLastTwoOnes(user_id: string): Promise<WorkoutFeedback[]> {
     const userWorkouts = this.items.filter(
-      (workout) => workout.user_id === user_id && workout.deletedDate === null,
+      (workout) => workout.user_id === user_id,
     );
 
     const sortedWorkouts = userWorkouts.sort(
