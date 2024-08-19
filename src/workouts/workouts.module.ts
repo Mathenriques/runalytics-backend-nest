@@ -10,6 +10,7 @@ import { Workout } from './entities/workout.entity';
 import { WorkoutTypeORMRepository } from './repositories/typeorm/workout.repository';
 import { UserTypeOrmRepository } from 'src/users/repositories/typeorm/user.repository';
 import { User } from 'src/users/entities/user.entity';
+import { CompareWorkoutsUseCase } from './use-cases/compare-workouts.use-case';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Workout, User])],
@@ -19,6 +20,7 @@ import { User } from 'src/users/entities/user.entity';
     GetAllUserWorkouts,
     UpdateWorkoutUseCase,
     GetUserProfileUseCase,
+    CompareWorkoutsUseCase,
     WorkoutTypeORMRepository,
     UserTypeOrmRepository,
     {

@@ -2,6 +2,7 @@ import { Workout } from 'src/workouts/entities/workout.entity';
 import { IWorkoutRepository } from '../IWorkoutRepository';
 import { Between, LessThanOrEqual, MoreThanOrEqual, Repository } from 'typeorm';
 import { InjectRepository } from '@nestjs/typeorm';
+import { WorkoutFeedback } from 'src/workouts/use-cases/compare-workouts.use-case';
 
 export class WorkoutTypeORMRepository implements IWorkoutRepository {
   constructor(
@@ -39,6 +40,22 @@ export class WorkoutTypeORMRepository implements IWorkoutRepository {
   async getAllUserWorkouts(user_id: string): Promise<Workout[]> {
     return await this.typeOrmRepository.find({
       where: { user_id, deletedDate: null },
+      order: { start_date: 'DESC' },
+    });
+  }
+
+  async getLastTwoOnes(user_id: string): Promise<WorkoutFeedback[]> {
+    return await this.typeOrmRepository.find({
+      where: { user_id, deletedDate: null },
+      select: {
+        stress_level: true,
+        weekly_volume: true,
+        sleep_hours: true,
+        strengthening_workouts: true,
+        diet_level: true,
+      },
+      order: { start_date: 'DESC' },
+      take: 2,
     });
   }
 
