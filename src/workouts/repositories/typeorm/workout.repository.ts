@@ -40,6 +40,7 @@ export class WorkoutTypeORMRepository implements IWorkoutRepository {
   async getAllUserWorkouts(user_id: string): Promise<Workout[]> {
     return await this.typeOrmRepository.find({
       where: { user_id, deletedDate: null },
+      order: { start_date: 'DESC' },
     });
   }
 
