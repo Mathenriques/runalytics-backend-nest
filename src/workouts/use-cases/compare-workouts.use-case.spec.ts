@@ -82,7 +82,7 @@ describe('Compare Two Workouts', () => {
     expect(result.strengthening_workouts.value).toBe(-1);
     expect(result.stress_level.value).toBe(-1);
     expect(result.diet_level.value).toBe(0);
-    expect(result.sleep_hours.value).toBe(0);
+    expect(result.sleep_hours.value).toBe(-1);
   });
 
   it('Should be able to only return only one workout, if just have one created', async () => {
