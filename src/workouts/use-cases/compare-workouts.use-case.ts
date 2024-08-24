@@ -14,8 +14,9 @@ export type WorkoutFeedback = Omit<
 >;
 
 export type ItemsFeedback = {
-  status: 'Bom' | 'Médio' | 'Ruim';
+  status: 'Ótimo' | 'Ok' | 'Ruim';
   value: number;
+  message: string;
 };
 
 export type WorkoutFeedbackResponse = {
@@ -38,11 +39,11 @@ export class CompareWorkoutsUseCase {
 
     if (!lastTwoWorkouts || lastTwoWorkouts.length < 2) {
       return {
-        weekly_volume: { status: 'Médio', value: 0 },
-        sleep_hours: { status: 'Médio', value: 0 },
-        stress_level: { status: 'Médio', value: 0 },
-        strengthening_workouts: { status: 'Médio', value: 0 },
-        diet_level: { status: 'Médio', value: 0 },
+        weekly_volume: { status: 'Ok', value: 0, message: '' },
+        sleep_hours: { status: 'Ok', value: 0, message: '' },
+        stress_level: { status: 'Ok', value: 0, message: '' },
+        strengthening_workouts: { status: 'Ok', value: 0, message: '' },
+        diet_level: { status: 'Ok', value: 0, message: '' },
       };
     }
 
@@ -81,21 +82,24 @@ export class CompareWorkoutsUseCase {
   ): WorkoutFeedbackResponse['weekly_volume'] {
     if (current === previous) {
       return {
-        status: 'Médio',
+        status: 'Ok',
         value: 0,
+        message: 'Kilometragem mantido',
       };
     }
 
     if (current <= previous * 1.1) {
       return {
-        status: 'Bom',
+        status: 'Ótimo',
         value: current - previous,
+        message: 'Kilometragem aumentou dentro do ideal!',
       };
     }
 
     return {
       status: 'Ruim',
       value: current - previous,
+      message: 'Kilometragem aumentou fora do ideal!',
     };
   }
 
@@ -110,8 +114,9 @@ export class CompareWorkoutsUseCase {
       (current < previous && current >= 7)
     ) {
       return {
-        status: 'Bom',
+        status: 'Ótimo',
         value: current - previous,
+        message: 'Horas de sono dentro do ideal!',
       };
     }
 
@@ -119,6 +124,7 @@ export class CompareWorkoutsUseCase {
       return {
         status: 'Ruim',
         value: current - previous,
+        message: 'Horas de sono abaixo do ideal! Aumente suas horas de sono!',
       };
     }
   }
@@ -129,8 +135,9 @@ export class CompareWorkoutsUseCase {
   ): WorkoutFeedbackResponse['stress_level'] {
     if (current === previous) {
       return {
-        status: 'Médio',
+        status: 'Ok',
         value: 0,
+        message: 'Nível de estresse mantido, atenção!',
       };
     }
 
@@ -138,12 +145,14 @@ export class CompareWorkoutsUseCase {
       return {
         status: 'Ruim',
         value: current - previous,
+        message: 'Nível de estresse aumentou! Cuidado!',
       };
     }
 
     return {
-      status: 'Bom',
+      status: 'Ótimo',
       value: current - previous,
+      message: 'Nível de estresse diminuiu! Continue assim!',
     };
   }
 
@@ -153,21 +162,25 @@ export class CompareWorkoutsUseCase {
   ): WorkoutFeedbackResponse['strengthening_workouts'] {
     if (current === previous) {
       return {
-        status: 'Médio',
+        status: 'Ok',
         value: 0,
+        message: 'Quantidade de treinos de fortalecimento mantidos!',
       };
     }
 
     if (current > previous) {
       return {
-        status: 'Bom',
+        status: 'Ótimo',
         value: current - previous,
+        message: 'Quantidade de treinos de fortalecimento aumentou!',
       };
     }
 
     return {
       status: 'Ruim',
       value: current - previous,
+      message:
+        'Quantidade de treinos de fortalecimento diminuiu! Foque em aumentar seus treinos!',
     };
   }
 
@@ -178,8 +191,10 @@ export class CompareWorkoutsUseCase {
     if (current === previous || current < previous) {
       if (current === 2) {
         return {
-          status: 'Médio',
+          status: 'Ok',
           value: current,
+          message:
+            'Dieta mantida! Mas ainda não está ideal, melhore sua alimentação!',
         };
       }
 
@@ -187,26 +202,31 @@ export class CompareWorkoutsUseCase {
         return {
           status: 'Ruim',
           value: current,
+          message: 'Seu nível de dieta está péssimo, melhore sua dieta!',
         };
       }
 
       return {
-        status: 'Bom',
+        status: 'Ótimo',
         value: current,
+        message: 'Sua dieta está ótima, continue assim!',
       };
     }
 
     if (current > previous) {
       if (current === 2) {
         return {
-          status: 'Médio',
+          status: 'Ok',
           value: current,
+          message:
+            'Dieta aumentada! Mas ainda não está ideal, melhore sua alimentação!',
         };
       }
 
       return {
-        status: 'Bom',
+        status: 'Ótimo',
         value: current,
+        message: 'Sua dieta aumentou para o melhor nível! Continue assim!',
       };
     }
   }
