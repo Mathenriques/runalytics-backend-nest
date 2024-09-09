@@ -10,7 +10,6 @@ export class ValidateCodeRestorePasswordUseCase {
   async execute(code: string): Promise<boolean> {
     const codeData = await this.codeRepo.findByCode(code);
 
-    console.log(codeData);
     
     if (!codeData) {
       throw new Error('Code not exists!')

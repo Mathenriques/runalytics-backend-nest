@@ -72,7 +72,6 @@ export class CompareWorkoutsUseCase {
       ),
     };
 
-    console.log(result);
     return result;
   }
 
@@ -107,7 +106,6 @@ export class CompareWorkoutsUseCase {
     previous: number,
     current: number,
   ): WorkoutFeedbackResponse['sleep_hours'] {
-    console.log(previous, current);
     if (
       (current === previous && current >= 7) ||
       (current > previous && current >= 7) ||
